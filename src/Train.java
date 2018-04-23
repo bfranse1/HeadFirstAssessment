@@ -35,17 +35,32 @@ public class Train {
         return -1;
     }
 
-    public void getIn(Traveler traveler) {
-        if (freePlaces() == -1) {
-            System.out.println("the second class if full " + traveler.getName() +  " will enter the first class");
-            return;
+    public int freePlacesF(){
+        for(int i = 0; i < places1.length; i++) {
+            if (places1[i] == null)
+                return i;
         }
+        return -1;
+    }
+
+
+    public int getIn(Traveler traveler) {
+        if (freePlaces() == -1) {
+            System.out.println("the second class is full " + traveler.getName() + " will enter the first class");
+        }
+        if (freePlacesF() == -1) {
+            System.out.println("Both classes are full");
+        }
+
 
         this.places2[freePlaces()] = traveler;
         showInfo(traveler);
-
+        return -1;
 
     }
+
+
+
     public void showInfo(Traveler traveler){
 
        System.out.println(traveler.getName() + " entered the train");

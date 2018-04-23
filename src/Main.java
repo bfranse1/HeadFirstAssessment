@@ -19,7 +19,10 @@ public class Main {
         Traveler bob = new Traveler("Bob");
         Traveler klaas = new Traveler("Klaas");
         Traveler joep = new Traveler("Joep");
-
+        Traveler erik = new Traveler("Erik");
+        Traveler andries = new Traveler("Andries");
+        Traveler lorena = new Traveler("Lorena");
+        Traveler henk = new Traveler("Henk");
 
         train.getIn(bart);
         train.getIn(jan);
@@ -27,6 +30,10 @@ public class Main {
         train.getIn(bob);
         train.getIn(klaas);
         train.getIn(joep);
+        train.getIn(erik);
+        train.getIn(andries);
+        train.getIn(lorena);
+        train.getIn(henk);
 
 
 
