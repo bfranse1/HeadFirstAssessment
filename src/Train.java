@@ -37,7 +37,7 @@ public class Train {
 
     public void getIn(Traveler traveler) {
         if (freePlaces() == -1) {
-            System.out.println("Train is full");
+            System.out.println("the second class if full " + traveler.getName() +  " will enter the first class");
             return;
         }
 
