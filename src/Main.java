@@ -3,37 +3,80 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Train train = new Train();
+        Train train = new Train(new Wagon());
 
-        GoesStation goesStation = new GoesStation();
-        ArnemuidenStation arnemuidenStation = new ArnemuidenStation();
-        MiddelburgStation middelburgStation = new MiddelburgStation();
-        VlissingenStation vlissingenStation = new VlissingenStation();
+        Station goesStation = new Station("Goes");
+        Station middelburgStation = new Station("Middelburg");
+        Station vlissingenStation = new Station("Vlissingen");
+        Station arnemuidenStation = new Station("Arnemuiden");
+        Station souStation =  new Station("Souburg");
 
-        train.travelNext();
-        train.travelNext();
+        Ticket vlisFirstClass = new FirstClassTicket();
+        Ticket middFirstClass = new FirstClassTicket();
+        Ticket arneFirstClass = new FirstClassTicket();
+        Ticket goesFirstClass = new FirstClassTicket();
 
-        Traveler bart = new Traveler("Bart");
-        Traveler jan = new Traveler("Jan");
-        Traveler piet = new Traveler("Piet");
-        Traveler bob = new Traveler("Bob");
-        Traveler klaas = new Traveler("Klaas");
-        Traveler joep = new Traveler("Joep");
-        Traveler erik = new Traveler("Erik");
-        Traveler andries = new Traveler("Andries");
-        Traveler lorena = new Traveler("Lorena");
-        Traveler henk = new Traveler("Henk");
+        Ticket goesSecondClass = new SecondClassTicket();
+        Ticket vlisSecondClass = new SecondClassTicket();
+        Ticket middSecondClass = new SecondClassTicket();
+        Ticket arneSecondClass = new SecondClassTicket();
 
-        train.getIn(bart);
-        train.getIn(jan);
-        train.getIn(piet);
-        train.getIn(bob);
-        train.getIn(klaas);
-        train.getIn(joep);
-        train.getIn(erik);
-        train.getIn(andries);
-        train.getIn(lorena);
-        train.getIn(henk);
+        //instant alle travelers
+        Traveler bart = new Traveler("Bart", vlisFirstClass, vlissingenStation);
+        Traveler geffrey = new Traveler("Geffrey", vlisSecondClass, vlissingenStation);
+        Traveler erik = new Traveler("Erik", vlisSecondClass, vlissingenStation);
+        Traveler andries = new Traveler("Andires", vlisSecondClass, vlissingenStation);
+        Traveler lorena = new Traveler("Lorena", vlisSecondClass, vlissingenStation);
+        Traveler jordy = new Traveler("Jordy", vlisSecondClass, vlissingenStation);
+        Traveler henk = new Traveler("Henk", arneSecondClass, souStation);
+        Traveler piet = new Traveler("Piet", arneSecondClass, souStation);
+        Traveler robert = new Traveler("Robert", middFirstClass, vlissingenStation);
+
+        //zwartrijder
+        Traveler ramona = new Traveler("Romona", null, middelburgStation);
+
+
+        //instappen in goes
+        train.enterFirst(bart);
+        train.enterSecond(geffrey);
+        train.enterSecond(erik);
+        train.enterSecond(andries);
+        train.enterSecond(lorena);
+        train.enterSecond(jordy);
+        train.enterFirst(ramona);
+
+        //weg uit goes
+        train.leaveStation();
+        train.arriveStation();
+
+        //aankomen in arnemuiden
+
+        train.addWagon(new Wagon());
+        train.enterSecond(henk);
+        train.enterSecond(piet);
+
+
+
+
+        //weg uit arnemuiden
+        train.leaveStation();
+        train.arriveStation();
+        //aankomen in middelburg
+
+        train.enterFirst(robert);
+
+        //weg uit middelburg
+        train.leaveStation();
+        train.arriveStation();
+        //aankomen in soeburg
+
+        //weg uit soeburg
+        train.leaveStation();
+        train.arriveStation();
+        //aankomen in vlissingen
+
+
+
 
 
 

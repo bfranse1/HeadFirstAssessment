@@ -1,74 +1,100 @@
+import java.util.ArrayList;
+
 public class Train {
 
-   public Traveler [] places2 = new Traveler[4];
-   public Traveler [] places1 = new Traveler[3];
-   public Station locationTrain = new GoesStation();
+   ArrayList<Wagon> wagons;
+   ArrayList<Station> stations;
+   Station currentStation;
 
 
-   public void travelNext(){
-       System.out.println("You travel to the next station...");
+   public Train(Wagon wagon){
 
-       if (locationTrain == new GoesStation()){
-           locationTrain = new ArnemuidenStation();
-           System.out.println("You've arrived in Arnemuiden");
+
+
+       stations = new ArrayList<>();
+       this.wagons = new ArrayList<>();
+
+       stations.add(new Station("Goes"));
+       stations.add(new Station("Arnemuiden"));
+       stations.add(new Station("Middelburg"));
+       stations.add(new Station("Souburg"));
+       stations.add(new Station("Vlissingen"));
+       currentStation = stations.get(0);
+
+
+       this.wagons.add(wagon);
+   }
+
+    public void enterFirst(Traveler traveler){
+       //check eerste klas
+        for(Wagon w : wagons){
+            //checkt ruimte eerste klas
+            if(!w.firstClassFull()){
+                w.enterFirstClass(traveler);
+                System.out.println(traveler.getName() + " gets into first class");
+                return;
+            }
+        }
+        // checkt tweede klas
+        for(Wagon w : wagons){
+            //checkt ruimte tweede klas
+            if(!w.secondClassFull()){
+                w.enterSecondClass(traveler);
+                System.out.println(traveler.getName() + " gets into second class");
+                return;
+            }
+        }
+
+   }
+
+   public void enterSecond(Traveler traveler){
+       //check eerste klas
+       for(Wagon w : wagons){
+           //checkt ruimte eerste klas
+           if(!w.secondClassFull()){
+               w.enterSecondClass(traveler);
+               System.out.println(traveler.getName() + " gets into second class");
+               return;
+           }
        }
-       else if(locationTrain == new ArnemuidenStation()){
-           locationTrain = new MiddelburgStation();
-           System.out.println("You've arrived in Middelburg");
-       }
-       else if(locationTrain == new MiddelburgStation()){
-           locationTrain = new VlissingenStation();
-           System.out.println("You've arrived in Vlissingen");
-       }
-       else if(locationTrain == new VlissingenStation()){
-           locationTrain = new GoesStation();
-           System.out.println("The train drives back to Goes");
+       // checkt tweede klas
+       for(Wagon w : wagons){
+           //checkt ruimte tweede klas
+           if(!w.firstClassFull()){
+               w.enterFirstClass(traveler);
+               System.out.println(traveler.getName() + " gets into first class");
+               return;
+           }
        }
 
    }
 
-    public int freePlaces() {
-        for(int i = 0; i < places2.length; i++) {
-            if (places2[i] == null)
-                return i;
-        }
-        return -1;
+    public void leaveStation(){
+       System.out.println("We're leaving " + currentStation.getLocation());
     }
 
-    public int freePlacesF(){
-        for(int i = 0; i < places1.length; i++) {
-            if (places1[i] == null)
-                return i;
-        }
-        return -1;
+    public void arriveStation(){
+       currentStation = stations.get(stations.indexOf(currentStation)+1);
+
+       System.out.println("were arriving in " + currentStation.getLocation());
+       leaveTrain();
     }
 
 
-    public int getIn(Traveler traveler) {
-        if (freePlaces() == -1) {
-            System.out.println("the second class is full " + traveler.getName() + " will enter the first class");
-        }
-        if (freePlacesF() == -1) {
-            System.out.println("Both classes are full");
-        }
+    public void leaveTrain(){
+       for(Wagon w : wagons){
+           w.leaveWithDestination(currentStation.getLocation());
 
+           System.out.println();
 
-        this.places2[freePlaces()] = traveler;
-        showInfo(traveler);
-        return -1;
+       }
 
     }
 
-
-
-    public void showInfo(Traveler traveler){
-
-       System.out.println(traveler.getName() + " entered the train");
+    public void addWagon(Wagon wagon){
+       System.out.println("Wagon is being added");
+       wagons.add(wagon);
     }
-
-
-
-
 
 
 
